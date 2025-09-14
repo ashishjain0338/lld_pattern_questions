@@ -1,4 +1,4 @@
-package parking_lot.app.ParkingSlot;
+package parking_lot.app.model.ParkingSlot;
 
 public class TwoWheelerParkingSlot extends ParkingSlot{
     public TwoWheelerParkingSlot(int loc, boolean is_occupied){

@@ -1,10 +1,11 @@
 package parking_lot.app.ParkingManager;
 
 import java.util.ArrayList;
-import parking_lot.app.ParkingSlot.*;
+
 import parking_lot.app.ParkingSlotFindingStrategy.FirstEmptySlotFindingStrategy;
 import parking_lot.app.ParkingSlotFindingStrategy.ParkingSlotFindingStrategy;
 import parking_lot.app.factory.*;
+import parking_lot.app.model.ParkingSlot.*;
 
 
 abstract public class ParkingManager {

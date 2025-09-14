@@ -1,4 +1,4 @@
-package parking_lot.app.ParkingSlot;
+package parking_lot.app.model.ParkingSlot;
 
 public abstract class ParkingSlot {
     public int loc = -1; // Location of ParkingSlot

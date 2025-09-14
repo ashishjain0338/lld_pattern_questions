@@ -14,7 +14,7 @@ public class Main{
         twoVehicleObj.removeParkingSlot(2);
         twoVehicleObj.removeParkingSlot(3);
         twoVehicleObj.printState(1);
-
+        
 
     }
 }
