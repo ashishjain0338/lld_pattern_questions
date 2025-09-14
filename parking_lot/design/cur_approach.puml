@@ -1,0 +1,131 @@
+@startuml ParkingLot
+
+abstract class ParkingSpot{
+    int loc
+    int fees
+    Vehile curVehicle
+
+    isempty()
+    allocate()
+    release()
+}
+
+class TwoWheelerParkingSpot extends ParkingSpot{
+
+}
+
+class FourWheelerParkingSpot extends ParkingSpot{
+
+}
+
+
+abstract ParkingManager <<singleton>>{
+    List<ParkingSpot> parkingLot;
+    parkingSpotFinder;
+
+    +findParkingSpot()
+    +allocateParkingSpot()
+    +releaseParkingSpot()
+}
+
+class TwoWheelerParkingManager <<singleton>> extends ParkingManager{
+
+}
+
+class FourWheelerParkingManager <<singleton>> extends ParkingManager{
+
+}
+
+abstract class parkingSpotFindingStrategy{
+    +findParkingSpot()
+}
+
+class randomParkingSpotFindingStrategy extends parkingSpotFindingStrategy{
+
+}
+
+class closestParkingSpotFindingStrategy extends parkingSpotFindingStrategy{
+
+}
+
+class ParkingManagerFactory {
+    +getParkingManagerObj()
+}
+
+class EntranceGate {
+    int loc;
+    ParkingManagerFactory;
+    findParkingSpot();
+    bookParkingSpot();
+    issueTicket();
+}
+
+class Ticket{
+    int entry_time;
+    parkingSpot;
+
+}
+
+class Vehicle{
+    enum VehicleType;
+    id;
+    ticket;
+}
+
+class ExitGate{
+    parkingManager();
+
+    computeParkingFees();
+    releaseParkingSpot();
+}
+
+class CostComputerFactory{
+    +computeCost()
+}
+
+abstract class CostComputer{
+    CostComputationStrategyFactory
+}
+
+class TwoWheelerCostComputer extends CostComputer{
+
+}
+class FourWheelerCostComputer extends CostComputer{
+
+}
+
+
+class CostComputationStrategyFactory{
+    getCostComputationStrategyObj()
+}
+
+abstract class CostComputationStrategy{
+    +computeCost()
+}
+
+class hourlyCostComputationStrategy extends CostComputationStrategy{
+
+}
+
+class fixedCostComputationStrategy extends CostComputationStrategy{
+
+}
+
+ExitGate *-- CostComputerFactory: has-a
+CostComputerFactory *-- CostComputer: has-a
+CostComputer *-- CostComputationStrategyFactory: has-a
+CostComputationStrategyFactory *-- CostComputationStrategy: has-a
+
+ParkingManager *-- ParkingSpot: has-a
+ParkingManager *-- parkingSpotFindingStrategy: has-a
+EntranceGate *-- ParkingManagerFactory: has-a
+ParkingManagerFactory o-- ParkingManager
+Ticket *-- ParkingSpot: has-a
+
+Vehicle --> EntranceGate: uses
+Vehicle --> ExitGate: uses
+EntranceGate --> Ticket: creates
+ExitGate --> Ticket: uses
+ExitGate *-- ParkingManagerFactory: has-a
+Vehicle o-- Ticket: has-a(weak)
+@enduml

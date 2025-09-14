@@ -1,0 +1,77 @@
+@startuml Parking_Lot_My_Intial_Approach
+
+abstract class Vehicle{
+    vehicleType: String
+}
+
+class Bike extends Vehicle{
+
+}
+class Car extends Vehicle{
+
+}
+class Truck extends Vehicle{
+
+}
+
+
+
+class ParkingLot{
+    lot : map<pair<int, int>, parkingSpot>
+    +findParkingSpot()
+    +addParkingSpot()
+    +removeParkingSpot()
+    +parkVehicle()
+    +removeVehicle()
+}
+
+class EntranceGate{
+    -id: string 
+    -location: pair<int, int>
+    -parkinglotObj: ParkingLot
+    
+    +generateTicket()
+}
+
+class ParkingTicket <<dataclass>>{
+    +parkingSpot
+    +entryTime
+}
+
+class ParkingSpot{
+    location: pair<int, int>
+    parkingSpotType: VehicleType
+    curVehicle: Vehicle
+    price: float
+    +isAvailable()
+    +occupyParkingSpot()
+    +clearParkingSpot()
+}
+
+class ExitGate{
+    -paymentStrategy
+    +calculateTicketPrice(ticket)
+}
+
+abstract class PaymentStrategy{
+
+}
+
+class HourlyCharge extends PaymentStrategy{
+
+}
+
+class MinuteCharge extends PaymentStrategy{
+
+}
+
+
+ParkingLot *-- ParkingSpot: has-a
+ExitGate *-- PaymentStrategy: has-a
+EntranceGate <-- ParkingTicket: uses
+EntranceGate o-- ParkingLot: has-a(weak)
+ParkingTicket o-- ParkingSpot: has-a(weak)
+EntranceGate <-- Vehicle: uses
+ParkingSpot <-- Vehicle: uses
+ExitGate <-- ParkingTicket: uses
+@enduml
